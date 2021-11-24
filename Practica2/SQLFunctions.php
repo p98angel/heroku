@@ -13,22 +13,30 @@
 			$query = "SELECT * FROM sensores WHERE(Valor='".$_GET['valorsensor']."') ORDER BY id DESC LIMIT 30 ";
 		else
 			$query = "SELECT * FROM sensores ORDER BY id DESC LIMIT 30 ";
-		$consulta = $conexion->prepare($query);
-		$consulta->execute();
-		$values = array();
-		while($fila = $consulta->fetch()){
-			$values['id']['data'] = $fila['data'];
-			$values['id']['time'] = $fila['data'];
-			$values['id']['sensor'] = $fila['data'];
-			$values['id']['value'] = $fila['data'];
-		}	
-		echo json_encode(array('conexion' => $connmsg, 'error' => $error, 'values' => $values));
+		try{
+			$consulta = $conexion->prepare($query);
+			$consulta->execute();
+			$values = array();
+			while($fila = $consulta->fetch()){
+				$values['id']['data'] = $fila['data'];
+				$values['id']['time'] = $fila['data'];
+				$values['id']['sensor'] = $fila['data'];
+				$values['id']['value'] = $fila['data'];
+			}	
+			echo json_encode(array('conexion' => $connmsg, 'error' => $error, 'values' => $values));
+		} catch (PDOException $e) {
+			$connmsg = $e->getMessage();
+		}
 	}
 	if(isset($_GET['esp32']))
 	{
-		$query = "INSERT INTO sensores (Fecha, Hora, Sensor, Valor) VALUES (CURRENT_DATE(), CURRENT_TIME(), '".$_GET['esp32_sensor']."', '".$_GET['esp32_lectura']."');";
-		$consulta = $conexion->prepare($query);
-		$consulta->execute();
-		echo json_encode(array('conexion' => $connmsg, 'error' => $error, 'message' => "Valores de sensor insertados correctamente: ".$_GET['esp32_sensor'].":".$_GET['esp32_lectura']));
+		try{
+			$query = "INSERT INTO sensores (Fecha, Hora, Sensor, Valor) VALUES (CURRENT_DATE(), CURRENT_TIME(), '".$_GET['esp32_sensor']."', '".$_GET['esp32_lectura']."');";
+			$consulta = $conexion->prepare($query);
+			$consulta->execute();
+			echo json_encode(array('conexion' => $connmsg, 'error' => $error, 'message' => "Valores de sensor insertados correctamente: ".$_GET['esp32_sensor'].":".$_GET['esp32_lectura']));
+		} catch (PDOException $e) {
+			$connmsg = $e->getMessage();
+		}
 	}
 ?>

@@ -1,21 +1,37 @@
 DROP DATABASE IF EXISTS Proyecto_Integrador;
 CREATE DATABASE Proyecto_Integrador;
 USE Proyecto_Integrador;
-
 CREATE TABLE IF NOT EXISTS leds(
     led1 TINYINT DEFAULT 1  COMMENT 'estado led 1',
     led2 TINYINT DEFAULT 1  COMMENT 'estado led 2',
     led3 TINYINT DEFAULT 1  COMMENT 'estado led 3',
     led4 TINYINT DEFAULT 1  COMMENT 'estado led 4'
 ) ENGINE = INNODB DEFAULT CHARSET = UTF8 COLLATE = UTF8_SPANISH_CI;
-
+INSERT INTO leds VALUES(0,0,0,0);
 CREATE TABLE IF NOT EXISTS sensores( 
     id INT AUTO_INCREMENT, 
-    fecha DATE NOT NULL, 
-    hora TIME NOT NULL, 
-    sensor VARCHAR(32) NOT NULL, 
-    vulue FLOAT NOT NULL, 
+    Fecha DATE NOT NULL, 
+    Hora TIME NOT NULL, 
+    Sensor VARCHAR(32) NOT NULL, 
+    Valor FLOAT NOT NULL, 
     PRIMARY KEY (id) 
-)ENGINE = INNODB DEFAULT CHARSET = UTF8 COLLATE = UTF8_SPANISH_CI
+)ENGINE = INNODB DEFAULT CHARSET = UTF8 COLLATE = UTF8_SPANISH_CI;
 
-INSERT INTO leds VALUES(0,0,0,0);
+INSERT INTO sensores( Fecha, Hora, Sensor, Valor) VALUES (CURRENT_DATE(),CURRENT_TIME(),'Pot02',456.6);
+INSERT INTO sensores( Fecha, Hora, Sensor, Valor) VALUES (CURRENT_DATE(),CURRENT_TIME(),'Pot02',654.9);
+INSERT INTO sensores( Fecha, Hora, Sensor, Valor) VALUES (CURRENT_DATE(),CURRENT_TIME(),'Pot02',405.8);
+INSERT INTO sensores( Fecha, Hora, Sensor, Valor) VALUES (CURRENT_DATE(),CURRENT_TIME(),'Pot02',873);
+INSERT INTO sensores( Fecha, Hora, Sensor, Valor) VALUES (CURRENT_DATE(),CURRENT_TIME(),'Pot02',284.6);
+INSERT INTO sensores( Fecha, Hora, Sensor, Valor) VALUES (CURRENT_DATE(),CURRENT_TIME(),'Pot02',278.9);
+INSERT INTO sensores( Fecha, Hora, Sensor, Valor) VALUES (CURRENT_DATE(),CURRENT_TIME(),'Pot02',789.5);
+INSERT INTO sensores( Fecha, Hora, Sensor, Valor) VALUES (CURRENT_DATE(),CURRENT_TIME(),'Pot02',456.4);
+
+
+CREATE TABLE IF NOT EXISTS botones(
+    boton1 TINYINT DEFAULT 1  COMMENT 'estado boton 1',
+    boton2 TINYINT DEFAULT 1  COMMENT 'estado boton 2',
+    boton3 TINYINT DEFAULT 1  COMMENT 'estado boton 3',
+    boton4 TINYINT DEFAULT 1  COMMENT 'estado boton 4'
+) ENGINE = INNODB DEFAULT CHARSET = UTF8 COLLATE = UTF8_SPANISH_CI;
+INSERT INTO botones VALUES(0,0,0,0);
+
