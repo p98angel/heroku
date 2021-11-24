@@ -1,15 +1,16 @@
 $(document).ready(function(){
-	setInterval(refrescar, 3000);//5 segundos
+	// setInterval(refrescar, 3000);//5 segundos
 	$.ajaxSetup({ cache: false });
 	refrescar();
 	function refrescar(){
 		$.ajax({//JSON HTTP-Request _POST
 			type: 'post',
-		 	data: {"leerBotones" : "true"},
+			data: {"leerBotones" : "true"},
 			dataType: 'json',
 			url: 'SQLFunctions.php',
 			success:function(response){
 				let jsonresponse = JSON.parse(JSON.stringify(response));
+				console.log('jsonresponse');
 				let templateHtml = `
 					<form>
 						<fieldset>
@@ -25,6 +26,7 @@ $(document).ready(function(){
 							templateHtml += '<input class="form-check-input" type="checkbox" id="pushButton' + i + '" disabled checked>';		
 						templateHtml += '<label class="form-check-label" for="pushButton' + i +'">Botón ' + i+ '</label>';
 						templateHtml += '</div>';
+						i++;
 					}
 				}
 				templateHtml += `

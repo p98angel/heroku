@@ -18,11 +18,12 @@
 			$consulta->execute();
 			$values = array();
 			while($fila = $consulta->fetch()){
-				$values['id']['data'] = $fila['data'];
-				$values['id']['time'] = $fila['data'];
-				$values['id']['sensor'] = $fila['data'];
-				$values['id']['value'] = $fila['data'];
+				$values['id']['Fecha'] = $fila['Fecha'];
+				$values['id']['Hora'] = $fila['Hora'];
+				$values['id']['Sensor'] = $fila['Sensor'];
+				$values['id']['Valor'] = $fila['Valor'];
 			}	
+			print(var_dump($values));
 			echo json_encode(array('conexion' => $connmsg, 'error' => $error, 'values' => $values));
 		} catch (PDOException $e) {
 			$connmsg = $e->getMessage();

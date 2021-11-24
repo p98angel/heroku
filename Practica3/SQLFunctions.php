@@ -1,5 +1,6 @@
 <?php 
 	include('../config/db.php');
+	print('s'); 	 	
 	if(isset($_GET['leerBotones'])){
 		try{
 			$consulta = $conexion->prepare("SELECT * FROM botones");
@@ -8,12 +9,12 @@
 				$boton1 = $fila['boton1'];
 				$boton2 = $fila['boton2'];
 				$boton3 = $fila['boton3'];
-				$boton4 = $fila['boton3'];
+				$boton4 = $fila['boton4'];
 			}
 		} catch (PDOException $e) {
 			$connmsg = $e->getMessage();
 		}
-		$json = json_encode(array('connmsg' => $connmsg, 'boton1' => $boton1, 'boton2' => $boton2, 'boton1' => $boton3, 'boton4' => $boton4));
+		$json = json_encode(array('connmsg' => $connmsg, 'boton1' => $boton1, 'boton2' => $boton2, 'boton3' => $boton3, 'boton4' => $boton4));
 		print($json);
 	}
 	if(isset($_POST['escribirBotones'])){
