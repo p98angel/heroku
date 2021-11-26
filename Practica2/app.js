@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	var banderaMenu = false;
 	$('#dropBoton').click(function(){
-		console.log("presiono el boton dropdown");
 		if(banderaMenu){
 			$('#dropdown-menu').removeClass('show');
 			banderaMenu = false;
@@ -12,7 +11,6 @@ $(document).ready(function(){
 	});
 
 	$('#item1').click(function(){
-		console.log("presiono el boton Fecha");
 		$('#dropdown-menu').removeClass('show');
 		$('#entrada1').attr('placeholder', 'Fecha de busqueda...');
 		$('#entrada2').attr('placeholder', '');
@@ -23,7 +21,6 @@ $(document).ready(function(){
 	});
 
 	$('#item2').click(function(){
-		console.log("presiono el boton Rango de fechas");
 		$('#dropdown-menu').removeClass('show');
 		$('#entrada1').attr('placeholder', 'Fecha inicial...');
 		$('#entrada2').attr('placeholder', 'Fecha final...');
@@ -34,7 +31,6 @@ $(document).ready(function(){
 	});
 
 	$('#item3').click(function(){
-		console.log("presiono el boton Rango de horas");
 		$('#dropdown-menu').removeClass('show');
 		$('#entrada1').attr('placeholder', 'Hora inicial...');
 		$('#entrada2').attr('placeholder', 'Hora final...');
@@ -45,7 +41,6 @@ $(document).ready(function(){
 	});
 
 	$('#item4').click(function(){
-		console.log("presiono el boton Nombre de sensor");
 		$('#dropdown-menu').removeClass('show');
 		$('#entrada1').attr('placeholder', 'Nombre del sensor...');
 		$('#entrada2').attr('placeholder', '');
@@ -56,7 +51,6 @@ $(document).ready(function(){
 	});
 
 	$('#item5').click(function(){
-		console.log("presiono el boton Valor de sensor");
 		$('#dropdown-menu').removeClass('show');
 		$('#entrada1').attr('placeholder', 'Valor del sensor...');
 		$('#entrada2').attr('placeholder', '');
@@ -65,34 +59,32 @@ $(document).ready(function(){
 		$('#entrada2').val('');
 		banderaMenu = false;
 	});
-
+	$.ajaxSetup({ cache: true });
 	$.ajax({//JSON Request
-			dataType: 'json',
-			url: 'SQLFunctions.php?web=true',
-			success:function(response){
+		dataType: 'json',
+		url: 'SQLFunctions.php?web=true',
+		success:function(response){
 			let jsonresponse = JSON.parse(JSON.stringify(response));
 			let templateHtml = '';
 			let par = false;
-			console.log("Conexion: " + jsonresponse.conexion);
-			console.log("Error: " + jsonresponse.error);
-			for (key in jsonresponse.values) {//for-each
+			for (const key in jsonresponse.values) {//for-each
 				if(par){
 					templateHtml += `
 					<tr class="table-primary">
-				      <td scope="row">`+jsonresponse.values[key].date+`</td>
-				      <td>`+jsonresponse.values[key].time+`</td>
-				      <td>`+jsonresponse.values[key].sensor+`</td>
-				      <td>`+jsonresponse.values[key].value+`</td>
+				      <td scope="row">`+jsonresponse.values[key].Fecha+`</td>
+				      <td>`+jsonresponse.values[key].Hora+`</td>
+				      <td>`+jsonresponse.values[key].Sensor+`</td>
+				      <td>`+jsonresponse.values[key].Valor+`</td>
 				    </tr>
 					`;
 					par = false;
 				}else{
 					templateHtml += `
 					<tr class="table-secondary">
-				      <td scope="row">`+jsonresponse.values[key].date+`</td>
-				      <td>`+jsonresponse.values[key].time+`</td>
-				      <td>`+jsonresponse.values[key].sensor+`</td>
-				      <td>`+jsonresponse.values[key].value+`</td>
+						<td scope="row">`+jsonresponse.values[key].Fecha+`</td>
+						<td>`+jsonresponse.values[key].Hora+`</td>
+						<td>`+jsonresponse.values[key].Sensor+`</td>
+						<td>`+jsonresponse.values[key].Valor+`</td>
 				    </tr>
 					`;
 					par = true;
@@ -103,7 +95,6 @@ $(document).ready(function(){
 	});
 
 	$('#botonBuscar').click(function(e){
-		console.log("presiono el boton buscar:");
 		var parametros = '';
 		if($('#entrada1').attr('placeholder') == 'Fecha de busqueda...'){
 			parametros = '?web=true&fecha='+$('#entrada1').val();
@@ -116,7 +107,6 @@ $(document).ready(function(){
 		} else if($('#entrada1').attr('placeholder') == 'Valor del sensor...'){
 			parametros = '?web=true&valorsensor='+$('#entrada1').val();
 		}
-		console.log(parametros);
 		e.preventDefault();//bloquea el form del html
 		$.ajax({//JSON Request
 			dataType: 'json',
@@ -124,17 +114,29 @@ $(document).ready(function(){
 			success:function(response){
 			let jsonresponse = JSON.parse(JSON.stringify(response));
 			let templateHtml = '';
-			console.log("Conexion: " + jsonresponse.conexion);
-			console.log("Error: " + jsonresponse.error);
-			for (key in jsonresponse.values) {//for-each
-				templateHtml += `
-				<tr class="table-primary">
-			      <td scope="row">`+jsonresponse.values[key].date+`</td>
-			      <td>`+jsonresponse.values[key].time+`</td>
-			      <td>`+jsonresponse.values[key].sensor+`</td>
-			      <td>`+jsonresponse.values[key].value+`</td>
-			    </tr>
-				`;
+			let par = 0;
+			for (const key in jsonresponse.values) {//for-each
+				if(par){
+					templateHtml += `
+					<tr class="table-primary">
+				      <td scope="row">`+jsonresponse.values[key].Fecha+`</td>
+				      <td>`+jsonresponse.values[key].Hora+`</td>
+				      <td>`+jsonresponse.values[key].Sensor+`</td>
+				      <td>`+jsonresponse.values[key].Valor+`</td>
+				    </tr>
+					`;
+					par = false;
+				}else{
+					templateHtml += `
+					<tr class="table-secondary">
+						<td scope="row">`+jsonresponse.values[key].Fecha+`</td>
+						<td>`+jsonresponse.values[key].Hora+`</td>
+						<td>`+jsonresponse.values[key].Sensor+`</td>
+						<td>`+jsonresponse.values[key].Valor+`</td>
+				    </tr>
+					`;
+					par = true;
+				}
 			}
 			$('#table-body').html(templateHtml);
 		}

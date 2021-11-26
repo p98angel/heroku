@@ -1,16 +1,17 @@
+  </div>
     <div class=" mt-6 fixed-bottom">
-        <nav class="nav  bg-primary text-center">
+        <nav class="nav   text-dark text-center" id="App-nav">
             <a class="nav-link text-white col-3" aria-current="page" href="<?php print(constant('URL')); ?>" id="linkInicio">
-                <ion-icon name="home-outline"></ion-icon>
+                <ion-icon name="planet"></ion-icon>
             </a>
-            <a class="nav-link text-white col-3" href="<?php print(constant('URL').'Practica1/' ); ?>" id="linkPractica1">
-                <ion-icon name="game-controller-outline"></ion-icon>
+            <a class="nav-link text-white col-3" href="<?php print(constant('URL').'Practica1/' ); ?>">
+                <ion-icon name="flashlight"></ion-icon>
             </a>
-            <a class="nav-link text-white col-3" href="<?php print(constant('URL').'Practica2/'); ?>" id="linkPractica2">
-                <ion-icon name="cart-outline"></ion-icon>
+            <a class="nav-link text-white col-3" href="<?php print(constant('URL').'Practica2/'); ?>">
+                <ion-icon name="thermometer"></ion-icon>
             </a>
-            <a class="nav-link text-white col-3" href="<?php print(constant('URL').'Practica3/'); ?>" id="linkPractica3">
-                <ion-icon name="id-card-outline"></ion-icon>
+            <a class="nav-link text-white col-3" href="<?php print(constant('URL').'Practica3/'); ?>">
+                <ion-icon name="options"></ion-icon>   
             </a>
         </nav>
     </div>

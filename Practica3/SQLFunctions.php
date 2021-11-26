@@ -1,6 +1,5 @@
 <?php 
 	include('../config/db.php');
-	print('s'); 	 	
 	if(isset($_GET['leerBotones'])){
 		try{
 			$consulta = $conexion->prepare("SELECT * FROM botones");

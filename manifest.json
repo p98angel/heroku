@@ -1,0 +1,37 @@
+{
+    "short_name": "Proyecto Integrador Septimo Semestre",
+    "name": "Proyecto Integrador",
+    "start_url": "index.php",
+    "background_color": "#fe006d",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#fe006d",
+    "icons": [{
+            "src": "img/iconos/16x16.png",
+            "type": "image/png",
+            "sizes": "16x16"
+        }, {
+            "src": "img/iconos/32x32.png",
+            "type": "image/png",
+            "sizes": "32x32"
+        }, {
+            "src": "img/iconos/48x48.png",
+            "type": "image/png",
+            "sizes": "48x48"
+        }, {
+            "src": "img/iconos/64x64.png",
+            "type": "image/png",
+            "sizes": "64x64"
+        },
+        {
+            "src": "img/iconos/128x128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "img/iconos/256x256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        }
+    ]
+}
